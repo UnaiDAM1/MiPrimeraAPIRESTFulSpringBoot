@@ -18,6 +18,7 @@ import java.util.List;
 public class LibrosControllerMOCK {
     LibrosRepository repositorioLibros;
 
+
     public LibrosControllerMOCK(){
     }
 
@@ -27,7 +28,7 @@ public class LibrosControllerMOCK {
     }
 
     //GET --> SELECT *
-    @GetMapping
+    @GetMapping("/getLibros")
     public ResponseEntity<List<Libro>> getLibro(){
         List<Libro> lista = this.repositorioLibros.findAll();
         System.out.println(lista);

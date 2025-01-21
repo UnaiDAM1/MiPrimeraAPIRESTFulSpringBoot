@@ -9,8 +9,7 @@ import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
 
-@Getter
-@Setter
+
 @Entity
 @Table(name = "libro")
 public class Libro {
@@ -38,29 +37,30 @@ public class Libro {
     public Libro() {
     }
 
-    public @Size(max = 20) String getIsbn() {
+    public String getIsbn() {
         return isbn;
     }
 
-    public void setIsbn(@Size(max = 20) String isbn) {
+    public void setIsbn(String isbn) {
         this.isbn = isbn;
     }
 
-    public @Size(max = 200) @NotNull String getTitulo() {
+    public String getTitulo() {
         return titulo;
     }
 
-    public void setTitulo(@Size(max = 200) @NotNull String titulo) {
+    public void setTitulo(String titulo) {
         this.titulo = titulo;
     }
 
-    public @Size(max = 100) @NotNull String getAutor() {
+    public String getAutor() {
         return autor;
     }
 
-    public void setAutor(@Size(max = 100) @NotNull String autor) {
+    public void setAutor(String autor) {
         this.autor = autor;
     }
+
 
     @Override
     public String toString() {

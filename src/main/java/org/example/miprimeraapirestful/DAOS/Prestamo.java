@@ -9,8 +9,7 @@ import org.hibernate.annotations.OnDeleteAction;
 
 import java.time.LocalDate;
 
-@Getter
-@Setter
+
 @Entity
 @Table(name = "prestamo")
 public class Prestamo {

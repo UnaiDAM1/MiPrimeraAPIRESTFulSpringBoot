@@ -8,8 +8,7 @@ import lombok.Setter;
 
 import java.time.LocalDate;
 
-@Getter
-@Setter
+
 @Entity
 @Table(name = "usuario")
 public class Usuario {
@@ -38,19 +37,6 @@ public class Usuario {
     @Column(name = "password", nullable = false)
     private String password;
 
-    public Usuario(Integer id, String dni, String nombre, String email, String password, String tipo, LocalDate penalizacionHasta) {
-        this.id = id;
-        this.dni = dni;
-        this.nombre = nombre;
-        this.email = email;
-        this.password = password;
-        this.tipo = tipo;
-        this.penalizacionHasta = penalizacionHasta;
-    }
-
-    public Usuario() {
-    }
-
     @NotNull
     @Lob
     @Column(name = "tipo", nullable = false)
@@ -58,6 +44,20 @@ public class Usuario {
 
     @Column(name = "penalizacionHasta")
     private LocalDate penalizacionHasta;
+
+
+    public Usuario(String dni, String nombre, String email, String password, String tipo) {
+        this.dni = dni;
+        this.nombre = nombre;
+        this.email = email;
+        this.password = password;
+        this.tipo = tipo;
+        this.penalizacionHasta = null;
+    }
+
+    public Usuario() {
+        penalizacionHasta = null;
+    }
 
 
     public @Size(max = 15) @NotNull String getDni() {
