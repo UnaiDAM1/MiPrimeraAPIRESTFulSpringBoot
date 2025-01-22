@@ -3,8 +3,6 @@ package org.example.miprimeraapirestful.DAOS;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import lombok.Getter;
-import lombok.Setter;
 
 import java.time.LocalDate;
 
@@ -42,7 +40,7 @@ public class Usuario {
     @Column(name = "tipo", nullable = false)
     private String tipo;
 
-    @Column(name = "penalizacionHasta")
+    @Column(name = "penalizacion_hasta")
     private LocalDate penalizacionHasta;
 
 

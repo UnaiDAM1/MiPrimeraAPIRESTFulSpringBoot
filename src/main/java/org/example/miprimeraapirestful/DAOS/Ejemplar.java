@@ -1,5 +1,7 @@
 package org.example.miprimeraapirestful.DAOS;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
@@ -21,6 +23,7 @@ public class Ejemplar {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "isbn", nullable = false)
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private org.example.miprimeraapirestful.DAOS.Libro isbn;
 
     public Ejemplar(Integer id, Libro isbn, String estado) {

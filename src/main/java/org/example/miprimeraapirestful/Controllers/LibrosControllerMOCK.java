@@ -1,7 +1,7 @@
 package org.example.miprimeraapirestful.Controllers;
 
 import jakarta.validation.Valid;
-import org.example.miprimeraapirestful.Repositorys.LibrosRepository;
+import org.example.miprimeraapirestful.Repositories.LibrosRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.MediaType;
@@ -52,7 +52,7 @@ public class LibrosControllerMOCK {
     }
 
     //POST con Form normal, se trabajará con JSONs normalmente...
-    @PostMapping(value = "/libroForm", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @PostMapping(value = "/libroForm")
     public ResponseEntity<Libro> addLibroForm(@RequestParam String isbn,
                                               @RequestParam String titulo,
                                               @RequestParam String autor){

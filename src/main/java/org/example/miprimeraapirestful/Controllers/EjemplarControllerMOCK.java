@@ -3,7 +3,7 @@ package org.example.miprimeraapirestful.Controllers;
 
 import org.example.miprimeraapirestful.DAOS.Ejemplar;
 import org.example.miprimeraapirestful.DAOS.Libro;
-import org.example.miprimeraapirestful.Repositorys.EjemplarRepository;
+import org.example.miprimeraapirestful.Repositories.EjemplarRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -70,7 +70,7 @@ public class EjemplarControllerMOCK {
         return ResponseEntity.ok().body(e);
     }
 
-    @PostMapping("/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteEjemplar(@PathVariable int id) {
         this.ejemplarRepository.deleteById(id);
         String mensaje = "Ejemplar con ID " + id + " eliminado";

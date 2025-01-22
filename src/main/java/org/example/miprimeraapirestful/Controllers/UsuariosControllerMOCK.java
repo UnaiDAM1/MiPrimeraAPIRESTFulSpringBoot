@@ -1,16 +1,14 @@
 package org.example.miprimeraapirestful.Controllers;
 
-import jakarta.persistence.Cacheable;
 import jakarta.validation.Valid;
 import org.example.miprimeraapirestful.DAOS.Usuario;
-import org.example.miprimeraapirestful.Repositorys.UsuariosRepository;
+import org.example.miprimeraapirestful.Repositories.UsuariosRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -28,7 +26,7 @@ public class UsuariosControllerMOCK {
         this.usuariosRepository = usuariosRepository;
     }
 
-    @GetMapping("/getUsuario")
+    @GetMapping("/getUsuarios")
     public ResponseEntity<List<Usuario>> getUsuarios() {
         List<Usuario> usuarios = usuariosRepository.findAll();
         System.out.println(usuarios);
@@ -37,7 +35,7 @@ public class UsuariosControllerMOCK {
 
     @GetMapping("/{id}")
     public ResponseEntity<Usuario> getUsuariosJSON(@PathVariable int id) {
-        Usuario u = this.usuariosRepository.findById(String.valueOf(id)).get();
+        Usuario u = this.usuariosRepository.findById(id).get();
         return ResponseEntity.ok(u);
     }
 
@@ -80,16 +78,16 @@ public class UsuariosControllerMOCK {
         return ResponseEntity.created(null).body(u);
     }
 
-//    @PutMapping("/{id}")
-//    public ResponseEntity<Usuario> updateUsuario(@PathVariable int id, @RequestBody Usuario usuario) {
-//        Usuario usuarioPersistido =usuariosRepository.save(usuario);
-//        return ResponseEntity.ok().body(usuarioPersistido);
-//    }
-//
-//    @PutMapping("/{id}")
-//    public ResponseEntity<String> deleteUsuario(@PathVariable int id) {
-//        usuariosRepository.findById(String.valueOf(id));
-//        String mensaje = "Usuario con ID " + id + " borrado";
-//        return ResponseEntity.ok().body(mensaje);
-//    }
+    @PutMapping("/{id}")
+    public ResponseEntity<Usuario> updateUsuario(@PathVariable int id, @RequestBody Usuario usuario) {
+        Usuario usuarioPersistido =usuariosRepository.save(usuario);
+        return ResponseEntity.ok().body(usuarioPersistido);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteUsuario(@PathVariable int id) {
+        this.usuariosRepository.deleteById(id);
+        String mensaje = "Usuario con ID " + id + " borrado";
+        return ResponseEntity.ok().body(mensaje);
+    }
 }
