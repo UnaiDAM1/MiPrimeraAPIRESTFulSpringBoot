@@ -1,5 +1,6 @@
 package org.example.miprimeraapirestful.DAOS;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
@@ -22,7 +23,15 @@ public class Prestamo {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "usuario_id", nullable = false)
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private org.example.miprimeraapirestful.DAOS.Usuario usuario;
+
+    @NotNull
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JoinColumn(name = "ejemplar_id", nullable = false)
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    private org.example.miprimeraapirestful.DAOS.Ejemplar ejemplar;
 
     @NotNull
     @Column(name = "fechaInicio", nullable = false)
@@ -31,11 +40,11 @@ public class Prestamo {
     @Column(name = "fechaDevolucion")
     private LocalDate fechaDevolucion;
 
-    public Prestamo(Integer id, Usuario usuario, LocalDate fechaInicio, LocalDate fechaDevolucion) {
-        this.id = id;
+    public Prestamo(Usuario usuario, Ejemplar ejemplar) {
         this.usuario = usuario;
-        this.fechaInicio = fechaInicio;
-        this.fechaDevolucion = fechaDevolucion;
+        this.ejemplar = ejemplar;
+        this.fechaInicio = LocalDate.now();
+        this.fechaDevolucion = null;
     }
 
     public Prestamo() {
@@ -73,11 +82,20 @@ public class Prestamo {
         this.fechaDevolucion = fechaDevolucion;
     }
 
+    public Ejemplar getEjemplar() {
+        return ejemplar;
+    }
+
+    public void setEjemplar(Ejemplar ejemplar) {
+        this.ejemplar = ejemplar;
+    }
+
     @Override
     public String toString() {
         return "Prestamo{" +
                 "id=" + id +
                 ", usuario=" + usuario +
+                ", ejemplar=" + ejemplar +
                 ", fechaInicio=" + fechaInicio +
                 ", fechaDevolucion=" + fechaDevolucion +
                 '}';
