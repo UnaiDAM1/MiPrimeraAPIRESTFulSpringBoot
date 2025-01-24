@@ -14,11 +14,15 @@ import org.hibernate.annotations.OnDeleteAction;
 @Entity
 @Table(name = "ejemplar")
 public class Ejemplar {
+    // Al generar un ejemplar se le asignará un ID
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Integer id;
 
+    // Es una clase la cual contiene un objeto que es otra clase, por ello tiene relación ManyToOne
+    // y tiene un OnDelete tipo cascade que si se elimina el libro que contiene también se borre
+    // este objeto
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
@@ -26,8 +30,7 @@ public class Ejemplar {
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private org.example.miprimeraapirestful.DAOS.Libro isbn;
 
-    public Ejemplar(Integer id, Libro isbn) {
-        this.id = id;
+    public Ejemplar(Libro isbn) {
         this.isbn = isbn;
         this.estado = "Disponible";
     }
@@ -35,6 +38,7 @@ public class Ejemplar {
     public Ejemplar() {
     }
 
+    // La columna estado será por defecto Disponible
     @ColumnDefault("'Disponible'")
     @Lob
     @Column(name = "estado")
