@@ -26,10 +26,10 @@ public class Ejemplar {
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private org.example.miprimeraapirestful.DAOS.Libro isbn;
 
-    public Ejemplar(Integer id, Libro isbn, String estado) {
+    public Ejemplar(Integer id, Libro isbn) {
         this.id = id;
         this.isbn = isbn;
-        this.estado = estado;
+        this.estado = "Disponible";
     }
 
     public Ejemplar() {

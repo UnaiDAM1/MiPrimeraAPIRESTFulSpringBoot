@@ -24,11 +24,9 @@ public class EjemplarControllerMOCK {
     public EjemplarControllerMOCK(){
     }
 
-    @GetMapping("/getEjemplares")
+    @GetMapping
     public ResponseEntity<List<Ejemplar>> getEjemplares() {
-        List<Ejemplar> ejemplares = this.ejemplarRepository.findAll();
-        System.out.println(ejemplares);
-        return ResponseEntity.ok(ejemplares);
+        return ResponseEntity.ok(this.ejemplarRepository.findAll());
     }
 
     @GetMapping("/{id}")
@@ -37,35 +35,14 @@ public class EjemplarControllerMOCK {
         return ResponseEntity.ok(e);
     }
 
-    @PostMapping("/ejemplar")
+    @PostMapping
     public ResponseEntity<Ejemplar> addEjemplar(@RequestBody Ejemplar ejemplar) {
         Ejemplar e = this.ejemplarRepository.save(ejemplar);
         return ResponseEntity.ok().body(e);
     }
 
-    @PostMapping(value = "/ejemplarForm", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<Ejemplar> addEjemplarForm(@RequestBody Libro libro,
-                                                    @RequestParam String estado) {
-        Ejemplar ejemplar = new Ejemplar();
-        ejemplar.setIsbn(libro);
-        ejemplar.setEstado(estado);
-        this.ejemplarRepository.save(ejemplar);
-        return ResponseEntity.created(null).body(ejemplar);
-    }
-
-    @PostMapping(value = "/ejemplarFormFichero", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<Ejemplar> addEjemplarFormFichero(@RequestBody Libro libro,
-                                                           @RequestParam String estado,
-                                                           @RequestParam MultipartFile file) {
-        Ejemplar ejemplar = new Ejemplar();
-        ejemplar.setIsbn(libro);
-        ejemplar.setEstado(estado);
-        this.ejemplarRepository.save(ejemplar);
-        return ResponseEntity.created(null).body(ejemplar);
-    }
-
-    @PutMapping("/{id}")
-    public ResponseEntity<Ejemplar> updateEjemplar(@PathVariable int id, @RequestBody Ejemplar ejemplar) {
+    @PutMapping
+    public ResponseEntity<Ejemplar> updateEjemplar(@RequestBody Ejemplar ejemplar) {
         Ejemplar e = this.ejemplarRepository.save(ejemplar);
         return ResponseEntity.ok().body(e);
     }

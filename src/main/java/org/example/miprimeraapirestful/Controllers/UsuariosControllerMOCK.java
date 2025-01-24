@@ -28,9 +28,7 @@ public class UsuariosControllerMOCK {
 
     @GetMapping("/getUsuarios")
     public ResponseEntity<List<Usuario>> getUsuarios() {
-        List<Usuario> usuarios = usuariosRepository.findAll();
-        System.out.println(usuarios);
-        return ResponseEntity.ok(usuarios);
+        return ResponseEntity.ok(this.usuariosRepository.findAll());
     }
 
     @GetMapping("/{id}")
@@ -45,41 +43,8 @@ public class UsuariosControllerMOCK {
         return ResponseEntity.ok(u);
     }
 
-    @PostMapping(value = "/usuarioForm", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<Usuario> addUsuarioForm(@RequestBody String dni,
-                                                  @RequestParam String nombre,
-                                                  @RequestParam String email,
-                                                  @RequestParam String password,
-                                                  @RequestParam String tipo) {
-        Usuario u = new Usuario();
-        u.setDni(dni);
-        u.setNombre(nombre);
-        u.setEmail(email);
-        u.setPassword(password);
-        u.setTipo(tipo);
-        this.usuariosRepository.save(u);
-        return ResponseEntity.created(null).body(u);
-    }
-
-    @PostMapping(value = "/usuarioFormFichero", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<Usuario> addUsuarioFormFichero(@RequestBody String dni,
-                                                         @RequestParam String nombre,
-                                                         @RequestParam String email,
-                                                         @RequestParam String password,
-                                                         @RequestParam String tipo,
-                                                         @RequestParam MultipartFile image) {
-        Usuario u = new Usuario();
-        u.setDni(dni);
-        u.setNombre(nombre);
-        u.setEmail(email);
-        u.setPassword(password);
-        u.setTipo(tipo);
-        this.usuariosRepository.save(u);
-        return ResponseEntity.created(null).body(u);
-    }
-
-    @PutMapping("/{id}")
-    public ResponseEntity<Usuario> updateUsuario(@PathVariable int id, @RequestBody Usuario usuario) {
+    @PutMapping
+    public ResponseEntity<Usuario> updateUsuario(@RequestBody Usuario usuario) {
         Usuario usuarioPersistido =usuariosRepository.save(usuario);
         return ResponseEntity.ok().body(usuarioPersistido);
     }

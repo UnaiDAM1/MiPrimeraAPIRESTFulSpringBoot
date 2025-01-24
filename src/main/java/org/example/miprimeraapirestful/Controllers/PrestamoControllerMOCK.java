@@ -26,11 +26,9 @@ public class PrestamoControllerMOCK {
         this.prestamosRepository = prestamosRepository;
     }
 
-    @GetMapping("/getPrestamos")
+    @GetMapping
     public ResponseEntity<List<Prestamo>> getPrestamos() {
-        List<Prestamo> prestamos = prestamosRepository.findAll();
-        System.out.println(prestamos);
-        return ResponseEntity.ok(prestamos);
+        return ResponseEntity.ok(this.prestamosRepository.findAll());
     }
 
     @GetMapping("/{id}")
@@ -39,35 +37,14 @@ public class PrestamoControllerMOCK {
         return ResponseEntity.ok(p);
     }
 
-    @PostMapping("/prestamo")
+    @PostMapping
     public ResponseEntity<Prestamo> addPrestamo(@RequestBody Prestamo prestamo){
         Prestamo p = this.prestamosRepository.save(prestamo);
         return ResponseEntity.ok().body(p);
     }
 
-    @PostMapping(value = "/prestamoForm", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<Prestamo> addPrestamoForm(@RequestBody Ejemplar ejemplar,
-                                                    @RequestBody Usuario usuario){
-        Prestamo prestamo = new Prestamo();
-        prestamo.setEjemplar(ejemplar);
-        prestamo.setUsuario(usuario);
-        this.prestamosRepository.save(prestamo);
-        return ResponseEntity.created(null).body(prestamo);
-    }
-
-    @PostMapping(value = "/ejemplarFormFichero", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<Prestamo> addEjemplarFormFichero(@RequestBody Ejemplar ejemplar,
-                                                           @RequestBody Usuario usuario,
-                                                           @RequestParam MultipartFile file){
-        Prestamo prestamo = new Prestamo();
-        prestamo.setEjemplar(ejemplar);
-        prestamo.setUsuario(usuario);
-        this.prestamosRepository.save(prestamo);
-        return ResponseEntity.created(null).body(prestamo);
-    }
-
-    @PutMapping("/{id}")
-    public ResponseEntity<Prestamo> updatePrestamo(@PathVariable int id, @RequestBody Prestamo prestamo){
+    @PutMapping
+    public ResponseEntity<Prestamo> updatePrestamo(@RequestBody Prestamo prestamo){
         Prestamo p = this.prestamosRepository.save(prestamo);
         return ResponseEntity.ok().body(p);
     }
