@@ -26,7 +26,7 @@ public class UsuariosControllerMOCK {
         this.usuariosRepository = usuariosRepository;
     }
 
-    @GetMapping("/getUsuarios")
+    @GetMapping
     public ResponseEntity<List<Usuario>> getUsuarios() {
         return ResponseEntity.ok(this.usuariosRepository.findAll());
     }
@@ -37,7 +37,7 @@ public class UsuariosControllerMOCK {
         return ResponseEntity.ok(u);
     }
 
-    @PostMapping("/usuario")
+    @PostMapping
     public ResponseEntity<Usuario> addUsuario(@Valid @RequestBody Usuario usuario) {
         Usuario u = this.usuariosRepository.save(usuario);
         return ResponseEntity.ok(u);
